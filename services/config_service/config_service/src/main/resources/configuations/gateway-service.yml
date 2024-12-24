@@ -1,0 +1,22 @@
+server:
+  port: 8222
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: pattern-library-service
+          uri: lb:http://PATTERN-LIBRARY-SERVICE
+          predicates:
+            - Path=/api/v1/pattern-library/**
+        - id: project-generator-service
+          uri: lb:http://PROJECT-GENERATOR-SERVICE
+          predicates:
+            - Path=/api/v1/project-generator/**
+
+        - id: user-management-service
+          uri: lb:http://USER-MANAGEMENT-SERVICE
+          predicates:
+            - Path=/api/v1/user-management/**

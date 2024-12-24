@@ -1,0 +1,42 @@
+server:
+  port: 8040
+
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  data:
+    data:
+      mongodb:
+        uri: mongodb://admin:majda@localhost:27017/notification?authSource=admin
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: notificationServiceGroup
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+    listener:
+      concurrency: 3
+  mail:
+    host: smtp.mailtrap.io
+    port: 587
+    username: dmaj3900@gmail.com
+    password: psswd
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enabled: true
+        connectiontimeout: 5000
+        timeout: 3000
+        writetimeout: 5000
+
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+
+logging:
+  level:
+    org.springframework.kafka: DEBUG
+    com.project.notification: DEBUG

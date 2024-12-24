@@ -1,0 +1,97 @@
+version: "3.9"
+services:
+  # MySQL Database
+  mysql:
+    container_name: ms_mysql
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: generator_db
+      MYSQL_USER: generator_user
+      MYSQL_PASSWORD: generator_pass
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - microservices-net
+    restart: unless-stopped
+
+  # Adminer for MySQL management
+  adminer:
+    container_name: ms_adminer
+    image: adminer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    networks:
+      - microservices-net
+    restart: unless-stopped
+
+  # Zookeeper for Kafka
+  zookeeper:
+    container_name: ms_zookeeper
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    networks:
+      - microservices-net
+
+  # Kafka for messaging
+  kafka:
+    container_name: ms_kafka
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+      - "9092:9092"
+    networks:
+      - microservices-net
+
+  # Zipkin for distributed tracing
+  zipkin:
+    container_name: ms_zipkin
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - microservices-net
+
+  # MailDev for email testing
+  maildev:
+    container_name: ms_maildev
+    image: maildev/maildev
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+    networks:
+      - microservices-net
+
+  # Nginx as API Gateway (Optional)
+  nginx:
+    container_name: ms_nginx_gateway
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - mysql
+      - kafka
+    networks:
+      - microservices-net
+
+networks:
+  microservices-net:
+    driver: bridge
+
+volumes:
+  mysql_data:
