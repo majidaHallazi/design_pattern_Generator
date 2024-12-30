@@ -5,7 +5,7 @@ Les modèles de conception sont accessibles via des liens GitHub intégrés dans
 ---
 
 ### **Aperçu**  
-La Bibliothèque de Modèles de Conception est une application web complète qui sert de ressource interactive pour apprendre et comprendre divers modèles de conception logicielle. Conçue avec **React** et **Next.js**, cette application a pour objectif d'offrir aux développeurs des explications détaillées, des exemples, et des cas d'utilisation concrets pour les principaux modèles de conception.  
+La Bibliothèque de Modèles de Conception est une application web complète qui sert de ressource interactive pour apprendre et comprendre divers modèles de conception logicielle, cette application a pour objectif d'offrir aux développeurs des explications détaillées, des exemples, et des cas d'utilisation concrets pour les principaux modèles de conception.  
 
 ---
 
@@ -14,7 +14,6 @@ La Bibliothèque de Modèles de Conception est une application web complète qui
 - Interface utilisateur interactive avec une barre latérale pour une navigation facile.  
 - Recherche alimentée par l'IA pour interroger les modèles de conception.  
 - Design responsive pour une visualisation optimale sur différents appareils.  
-- Exemples de code et applications réelles pour chaque modèle.  
 - Accès direct aux dépôts GitHub contenant des implémentations indépendantes.  
 
 ---
@@ -27,18 +26,17 @@ La Bibliothèque de Modèles de Conception est une application web complète qui
 - **Disjoncteur (Circuit Breaker)**  
 - **Traçage Distribué (Distributed Tracing)**  
 - **Consommateur Idempotent (Idempotent Consumer)**  
-- **Agrégation de Logs (Log Aggregation)**  
 
 #### **Modèles de conception classiques**  
-- **Fabrique (Factory)**  
-- **Constructeur (Builder)**  
-- **Façade (Facade)**  
-- **Stratégie (Strategy)**  
+- **Fabrique  
+- **Constructeur  
+- **Façade 
+- **Stratégie 
 
 ---
 
 ### **Technologies Utilisées**  
-- **React** : pour la construction de l'interface utilisateur.  
+- **Angular** : pour la construction de l'interface utilisateur.  
 - **Next.js** : pour le rendu côté serveur et la génération de sites statiques.  
 - **TypeScript** : pour un typage statique robuste.  
 - **Tailwind CSS** : pour le design et le style des composants.  
